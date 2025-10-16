@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&family=Lobster&display=swap');@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&display=swap');
+body{
+    background-color: rgb(255, 0, 234);
+    color: #161717;
+    height:auto;
+    min-height:100vh;
+}
+/* Container styling */
+.container {
+    font-family: 'BBH Sans Bartle', sans-serif ;
+    max-width: 65vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    font-family: 'Lobster', sans-serif ;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-top: 2em;
+}
+
+
