@@ -1,19 +1,23 @@
 /* Navigation */
 
 .vertical-buttons {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column; /* stack vertically */
-    gap: 10px; /* space between buttons */
+    flex-direction: row; /* horizontal layout */
+    gap: 40px; /* space between home and lesweek */
 }
 
-.vertical-buttons li a {
-    display: block;           /* makes the entire link clickable */
+.vertical-buttons > li {
+    position: relative; /* needed for dropdown positioning */
+}
+
+.vertical-buttons > li > a {
+    display: block;
     padding: 0px 0px;
     background-color: inherit;
     color: inherit;
@@ -23,6 +27,46 @@
     font-size: 4em;
 }
 
-.vertical-buttons li a:hover {
+.vertical-buttons > li > a.active {
+    font-weight: 900; /* extra bold for active link */
+}
+
+.vertical-buttons > li > a:hover {
     text-decoration: underline;
+}
+
+/* Dropdown styles */
+.dropdown-menu {
+    display: none; /* hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+    background-color: inherit;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* show on hover */
+}
+
+.dropdown-menu li {
+    padding: 5px 0;
+}
+
+.dropdown-menu li a {
+    font-size: 2.5em;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    text-decoration: underline;
+}
+
+.dropdown-menu li a.active {
+    font-weight: 900;
 }

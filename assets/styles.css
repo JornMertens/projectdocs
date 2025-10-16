@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&family=Lobster&family=Montserrat:wght@400;700;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&family=Lobster&display=swap');@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&display=swap');
 body{
-    background-color: rgb(255, 0, 234);
+    background-color: rgb(219, 88, 165);
     color: #161717;
     height:auto;
     min-height:100vh;
@@ -22,4 +22,7 @@ body{
     margin-top: 2em;
 }
 
-
+page {
+    display: block;
+    margin-top: 24em; /* extra ruimte voor dropdown menu */
+}
