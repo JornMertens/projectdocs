@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="assets/flexboxes.css">
     <link rel="stylesheet" href="assets/nav.css">
     <link rel="stylesheet" href="assets/typography.css">
+        <!-- Inline Editor CSS -->
+    <link rel="stylesheet" href="assets/inline-editor.css">
 </head>
 <body>
     <div class="container">
@@ -34,23 +36,52 @@
         <page>
             <h1>Lesweek 3</h1>
             <h2>Subtitle</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis pulvinar nisl, sed ultrices purus ornare et...
-            </p>
             <!-- Flex container with 2 columns -->
             <div class="two-columns">
+                <!-- EDITABLE SECTION 3: Left Column -->
                 <div class="column">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis pulvinar nisl, sed ultrices purus ornare et. Phasellus sit amet lacus urna.
-                    </p>
+                    <div class="editable-section" data-id="column-left">
+                        <div class="edit-icon" onclick="enableEdit(this)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                            </svg>
+                        </div>
+                        <div class="editable-content">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis pulvinar nisl, sed ultrices purus ornare et. Phasellus sit amet lacus urna.
+                            </p>
+                        </div>
+                        <div class="save-controls">
+                            <button class="btn-editor btn-save" onclick="saveEdit(this)">Opslaan</button>
+                            <button class="btn-editor btn-cancel" onclick="cancelEdit(this)">Annuleren</button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- EDITABLE SECTION 4: Right Column -->
                 <div class="column">
-                    <p>
-                        Nullam iaculis tristique varius. Donec placerat blandit leo. Vestibulum a dolor sed ex ornare finibus. Suspendisse pretium molestie orci.
-                    </p>
+                    <div class="editable-section" data-id="column-right">
+                        <div class="edit-icon" onclick="enableEdit(this)">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                            </svg>
+                        </div>
+                        <div class="editable-content">
+                            <p>
+                                Nullam iaculis tristique varius. Donec placerat blandit leo. Vestibulum a dolor sed ex ornare finibus. Suspendisse pretium molestie orci.
+                            </p>
+                        </div>
+                        <div class="save-controls">
+                            <button class="btn-editor btn-save" onclick="saveEdit(this)">Opslaan</button>
+                            <button class="btn-editor btn-cancel" onclick="cancelEdit(this)">Annuleren</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </page>
     </div>
+
+    <!-- Inline Editor JavaScript -->
+    <script src="assets/inline-editor.js"></script>
 </body>
 </html>
