@@ -1,0 +1,121 @@
+/* Inline Editor Styles */
+
+.editable-section {
+    position: relative;
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.editable-section:hover {
+    background: rgba(111, 2, 145, 0.05);
+    border-color: rgba(175, 76, 158, 0.2);
+}
+
+.editable-section:hover .edit-icon {
+    opacity: 1;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: #a200ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.edit-icon:hover {
+    background: #a200ff;
+    transform: scale(1.1);
+}
+
+.edit-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+}
+
+.editing {
+    border-color: #a200ff !important;
+    background: rgba(76, 175, 80, 0.1) !important;
+}
+
+.editable-content[contenteditable="true"] {
+    outline: none;
+    cursor: text;
+}
+
+.editable-content[contenteditable="true"]:focus {
+    outline: 2px solid #a200ff;
+    outline-offset: 2px;
+}
+
+.save-controls {
+    display: none;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.save-controls.active {
+    display: flex;
+}
+
+.btn-editor {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-save {
+    background: #a200ff;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #a200ff;
+}
+
+.btn-cancel {
+    background: #f44336;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #da190b;
+}
+
+.editor-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: #a200ff;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.editor-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
