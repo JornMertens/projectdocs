@@ -1,44 +1,64 @@
-Repository that illustrates the basics of HTML and CSS — part of the Grafische en Digitale Media learning materials. 
+# BP_HTML_09TWND
 
-## Introduces fundamental concepts in HTML and CSS.
+A clean and minimal starter template for building static HTML projects using **Tailwind CSS**.  
+This repo is designed for simple prototypes, landing pages, student projects, or any environment where you want Tailwind without complex frameworks.
 
-Serves as a starting point for students in Digital & Graphic Media (AP Antwerp) to explore structure, semantic elements, styling, and basic layout.
-Contains simple, annotated example code that is easy to read, run, and modify.
-Enables learners to experiment, break things, and then understand how changes affect rendering in the browser.
+---
 
-## A live version of this repository is deployed at:
-https://aphtml00.netlify.app/ 
+# 🚀 Getting Started
+
+## 1. Download the Project (No Git Required)
+
+If you don’t want to use Git, you can download the project as a ZIP:
+
+1. Go to the repository page  
+   https://github.com/bureaupixel/BP_HTML_09TWND
+2. Click the green **Code** button  
+3. Choose **Download ZIP**  
+4. Extract the ZIP file on your computer  
+
+Now you have the project folder ready to use.
+
+---
+
+# 📦 Install Dependencies
+
+Open the extracted folder in your terminal:
+
+cd BP_HTML_09TWND
+
+Then install everything needed:
+npm install
+
+# Build Tailwind (Watch Mode)
+Run:
+npm run build
+
+This will:
+Read the Tailwind directives from src/input.css
+Build the final CSS into dist/output.css
+Watch for changes in your HTML/CSS files
+Keep this running while you're working.
+
+# Using terminal
+open index.html
 
 
-Use the live demo to quickly see how the HTML + CSS are rendered, and to validate that your local version behaves equivalently.
+# How Tailwind Works Here
 
-Typical contents of this repository include:
-index.html 
-the main HTML file demonstrating document structure, elements like headings, paragraphs, links, images, etc.
-assets/ 
-folder for stylesheets, images, or other supporting files.
-.gitignore 
-to exclude system files or build artifacts.
-README.md 
-this file, explaining the repository’s purpose, structure, how to run / test, and guidelines.
+You write classes directly in index.html
+Tailwind scans the project based on:
+content: ["./*.html"]
+Tailwind outputs the generated CSS into:
+dist/output.css
 
+The HTML links to this file:
+<link href="./dist/output.css" rel="stylesheet">
 
-##  Usage Instructions
-Clone or fork the repo:
-git clone https://github.com/Grafische-en-Digitale-Media/AP_HTML_00_start.git
-
-Open index.html in your browser to see the rendered page.
-
-Edit the HTML / CSS files (e.g. in assets/) to experiment with layout, colors, typography, structure, etc.
-
-Use your browser’s developer tools (Inspect, CSS inspector) to see how changes affect the DOM / styles in real time.
-
-##  Suggested Next Steps (in the curriculum)
-Once students are comfortable with this starter repository, they may proceed to:
-More advanced HTML topics (forms, accessibility)
-CSS layout techniques (flexbox, grid)
-Responsive design (media queries, fluid layouts)
-Introducing JavaScript for interactivity
-Eventually server-side or build tooling via Node.js
-
-> Digital & Graphic Media at AP, Antwerp - Belgium
+# Customization
+Edit Tailwind Settings
+Modify tailwind.config.js to:
+Add custom colors
+Extend fonts
+Add spacing
+Enable plugins
