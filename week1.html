@@ -8,6 +8,31 @@
     <link rel="stylesheet" href="assets/flexboxes.css">
     <link rel="stylesheet" href="assets/typography.css">
     <link rel="stylesheet" href="assets/weeks.css">
+    <style>
+        /* Afbeelding container styling toegevoegd */
+        .image-container {
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid #444;       /* donkere rand */
+            border-radius: 12px;          /* afgeronde hoeken */
+            overflow: hidden;             /* afbeelding blijft binnen container */
+            background-color: #2a3360;    /* donkerblauwe achtergrond */
+            margin: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;           /* lichte afronding van afbeelding */
+        }
+
+        .image-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+    </style>
 </head>
 <body>
     <!-- Hero Banner -->
@@ -37,42 +62,53 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Week Item -->
-        <script>
-            // Menu collapse functionality
-            const menuCollapseBtn = document.getElementById('menuCollapseBtn');
-            const menuItems = document.getElementById('menuItems');
+        <h2>Week 1</h2>
+        <p>De eerste week heb ik nagedacht over hoe ik mijn informatie het best kon overbrengen op mijn borden. Ik begon met schetsen en het uitwerken van verschillende ideeën. Ook heb ik ter inspiratie meerdere borden opgezocht, zodat ik een duidelijk beeld had van de richting die ik uit wilde.</p>
+        <p>Klik om het groter te maken.</p>
 
-            if (menuCollapseBtn) {
-                menuCollapseBtn.addEventListener('click', function() {
-                    menuItems.classList.toggle('collapsed');
-                    menuCollapseBtn.classList.toggle('collapsed');
-                    menuCollapseBtn.textContent = menuCollapseBtn.classList.contains('collapsed') ? '-' : '>';
-                });
-            }
+        <!-- Week Item - Image met CSS styling -->
+        <a href="images/Lo-fi Brainstorm.png" target="_blank">
+            <div class="image-container">
+                <img src="images/Lo-fi Brainstorm.png" alt="Lo-fi Brainstorm" width="300">
+            </div>
+        </a>
+    </div>
 
-            // Week content toggle functionality
-            function toggleWeek(header) {
-                const content = header.nextElementSibling;
-                const icon = header.querySelector('.week-toggle-icon');
-                content.classList.toggle('collapsed');
-                icon.classList.toggle('collapsed');
-            }
+    <script>
+        // Menu collapse functionality
+        const menuCollapseBtn = document.getElementById('menuCollapseBtn');
+        const menuItems = document.getElementById('menuItems');
 
-            // Set active menu item on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                document.querySelectorAll('.menu-items a').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === currentPage) {
-                        link.classList.add('active');
-                    }
-                });
+        if (menuCollapseBtn) {
+            menuCollapseBtn.addEventListener('click', function() {
+                menuItems.classList.toggle('collapsed');
+                menuCollapseBtn.classList.toggle('collapsed');
+                menuCollapseBtn.textContent = menuCollapseBtn.classList.contains('collapsed') ? '-' : '>';
             });
-        </script>
+        }
+
+        // Week content toggle functionality
+        function toggleWeek(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.week-toggle-icon');
+            content.classList.toggle('collapsed');
+            icon.classList.toggle('collapsed');
+        }
+
+        // Set active menu item on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.menu-items a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 
     <footer>
-        <p>&copy; 2024 Jorn Mertens. All rights reserved.</p>
+        <p>&copy; 2025 Jorn Mertens. All rights reserved.</p>
     </footer>
 </body>
 </html>
