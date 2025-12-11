@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 10 - Prototyping Tools</title>
+    <link rel="stylesheet" href="assets/tailwind.css">
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/flexboxes.css">
     <link rel="stylesheet" href="assets/typography.css">
     <link rel="stylesheet" href="assets/weeks.css">
 </head>
 <body>
+    <div class="author-name">Jorn Mertens</div>
+    
     <!-- Hero Banner -->
     <div class="hero-banner">
         <h1>Prototyping Tools</h1>
@@ -18,7 +21,12 @@
     <!-- Menu Container -->
     <!-- Menu Container -->
     <div class="menu-container">
-        <a href="index.html" style="display: inline-block; padding: 12px 20px; background-color: #4a4a54; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 0.95em; font-weight: 500; border: 2px solid transparent; transition: all 0.3s ease; font-family: 'Roboto Slab', serif;">Home</a>
+        <a href="index.html" class="home-btn-pill">Home</a>
+        <button class="menu-toggle-btn" id="menuCollapseBtn" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
         <div id="menuItems" class="menu-items">
             <a href="week1.html">Week 1</a>
             <a href="week2.html">Week 2</a>
@@ -31,13 +39,34 @@
             <a href="week9.html">Week 9</a>
             <a href="week10.html" class="active">Week 10</a>
         </div>
-        <button class="menu-collapse-btn" id="menuCollapseBtn">></button>
     </div>
 
     <div class="divider"></div>
+    <div class="container">
+        <h2>Week 10</h2>
+        <p>hier heb ik nog niks</p>
+    </div>
+
 
     <!-- Main Content -->
     <script>
+        // Mouse tracking gradient effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            // Subtle shift in lightness based on mouse position
+            const lightness1 = Math.round(15 + (x - 50) / 10);
+            const lightness2 = Math.round(20 + (y - 50) / 10);
+            const lightness3 = Math.round(15 + (x - 50) / 10);
+            
+            document.body.style.background = `linear-gradient(${135 + (x - 50) / 5}deg, 
+                rgb(${lightness1}, ${lightness1}, ${lightness1}) 0%, 
+                rgb(${lightness2 + 10}, ${lightness2 + 10}, ${lightness2 + 10}) 50%, 
+                rgb(${lightness3}, ${lightness3}, ${lightness3}) 100%)`;
+            document.body.style.backgroundAttachment = 'fixed';
+        });
+
         // Menu collapse functionality
         const menuCollapseBtn = document.getElementById('menuCollapseBtn');
         const menuItems = document.getElementById('menuItems');
@@ -45,8 +74,7 @@
         if (menuCollapseBtn) {
             menuCollapseBtn.addEventListener('click', function() {
                 menuItems.classList.toggle('collapsed');
-                menuCollapseBtn.classList.toggle('collapsed');
-                menuCollapseBtn.textContent = menuCollapseBtn.classList.contains('collapsed') ? '-' : '>';
+                menuCollapseBtn.classList.toggle('active');
             });
         }
 

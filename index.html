@@ -5,33 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prototyping Tools - 10 Weeks</title>
+    <link rel="stylesheet" href="assets/tailwind.css">
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/flexboxes.css">
     <link rel="stylesheet" href="assets/typography.css">
     <link rel="stylesheet" href="assets/weeks.css">
 </head>
 <body>
+    <div class="author-name">Jorn Mertens</div>
+    
     <!-- Hero Banner -->
     <div class="hero-banner">
         <h1>Prototyping Tools</h1>
     </div>
 
-    <!-- Menu Container -->
-    <div class="menu-container">
-        <a href="index.html" class="active" style="display: inline-block; padding: 12px 20px; background-color: #4a4a54; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 0.95em; font-weight: 500; border: 2px solid #87ceeb; transition: all 0.3s ease; font-family: 'Roboto Slab', serif;">Home</a>
-        <div id="menuItems" class="menu-items">
-            <a href="week1.html">Week 1</a>
-            <a href="week2.html">Week 2</a>
-            <a href="week3.html">Week 3</a>
-            <a href="week4.html">Week 4</a>
-            <a href="week5.html">Week 5</a>
-            <a href="week6.html">Week 6</a>
-            <a href="week7.html">Week 7</a>
-            <a href="week8.html">Week 8</a>
-            <a href="week9.html">Week 9</a>
-            <a href="week10.html">Week 10</a>
+    <!-- Centered Home button above carousel -->
+    <div style="display:flex; justify-content:center;">
+        <a href="index.html" class="home-btn-pill">Home</a>
+    </div>
+
+    <!-- Weeks Carousel -->
+    <div class="weeks-carousel">
+        <button class="carousel-btn" id="weeksPrev" aria-label="Previous">‹</button>
+        <div class="carousel-track" id="weeksTrack">
+            <div class="carousel-item"><a href="week1.html">Week 1</a></div>
+            <div class="carousel-item"><a href="week2.html">Week 2</a></div>
+            <div class="carousel-item"><a href="week3.html">Week 3</a></div>
+            <div class="carousel-item"><a href="week4.html">Week 4</a></div>
+            <div class="carousel-item"><a href="week5.html">Week 5</a></div>
+            <div class="carousel-item"><a href="week6.html">Week 6</a></div>
+            <div class="carousel-item"><a href="week7.html">Week 7</a></div>
+            <div class="carousel-item"><a href="week8.html">Week 8</a></div>
+            <div class="carousel-item"><a href="week9.html">Week 9</a></div>
+            <div class="carousel-item"><a href="week10.html">Week 10</a></div>
         </div>
-        <button class="menu-collapse-btn" id="menuCollapseBtn">></button>
+        <button class="carousel-btn" id="weeksNext" aria-label="Next">›</button>
     </div>
 
     <div class="divider"></div>
@@ -39,22 +47,37 @@
     <div class="container">
         <h2 style="text-align: center; font-size: 1.8em; margin: 1.5em 0 0.5em 0;">10 Week Journey</h2>
         <p>Welkom, ik ben Jorn Mertens, een enthousiaste student die zich verdiept in prototyping tools. Dit project documenteert mijn reis door 10 weken van leren, experimenteren en groeien in deze fascinerende discipline. </p>
-
-        <div class="welcome-section">
-            <p style="max-width: 70ch; margin: 0 auto;">Hello! This site documents what I worked on during 10 weeks. Each week page contains notes, tasks, and reflections. Use the menu above to browse the weeks.</p>
-        </div>
     </div>
 
     <script>
-        // Menu collapse functionality
-        const menuCollapseBtn = document.getElementById('menuCollapseBtn');
-        const menuItems = document.getElementById('menuItems');
+        // Mouse tracking gradient effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            // Subtle shift in lightness based on mouse position
+            const lightness1 = Math.round(15 + (x - 50) / 10);
+            const lightness2 = Math.round(20 + (y - 50) / 10);
+            const lightness3 = Math.round(15 + (x - 50) / 10);
+            
+            document.body.style.background = `linear-gradient(${135 + (x - 50) / 5}deg, 
+                rgb(${lightness1}, ${lightness1}, ${lightness1}) 0%, 
+                rgb(${lightness2 + 10}, ${lightness2 + 10}, ${lightness2 + 10}) 50%, 
+                rgb(${lightness3}, ${lightness3}, ${lightness3}) 100%)`;
+            document.body.style.backgroundAttachment = 'fixed';
+        });
 
-        if (menuCollapseBtn) {
-            menuCollapseBtn.addEventListener('click', function() {
-                menuItems.classList.toggle('collapsed');
-                menuCollapseBtn.classList.toggle('collapsed');
-                menuCollapseBtn.textContent = menuCollapseBtn.classList.contains('collapsed') ? '-' : '>';
+        // Carousel controls
+        const weeksTrack = document.getElementById('weeksTrack');
+        const weeksPrev = document.getElementById('weeksPrev');
+        const weeksNext = document.getElementById('weeksNext');
+        if (weeksTrack && weeksPrev && weeksNext) {
+            weeksTrack.style.scrollBehavior = 'smooth';
+            weeksPrev.addEventListener('click', () => {
+                weeksTrack.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+            weeksNext.addEventListener('click', () => {
+                weeksTrack.scrollBy({ left: 300, behavior: 'smooth' });
             });
         }
 
