@@ -4,100 +4,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 5 - Prototyping Tools</title>
+    <link rel="stylesheet" href="assets/exact-mac-template.css">
     <link rel="stylesheet" href="assets/tailwind.css">
-    <link rel="stylesheet" href="assets/styles.css">
-    <link rel="stylesheet" href="assets/flexboxes.css">
-    <link rel="stylesheet" href="assets/typography.css">
-    <link rel="stylesheet" href="assets/weeks.css">
+    <style>
+        .modal-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        .modal-lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-thumbnail {
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .modal-thumbnail:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="author-name">Jorn Mertens</div>
-    
-    <!-- Hero Banner -->
-    <div class="hero-banner">
-        <h1>Prototyping Tools</h1>
-    </div>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-inner">🌙</span>
+    </button>
 
-    <!-- Menu Container -->
-    <div class="menu-container">
-        <a href="index.html" class="home-btn-pill">Home</a>
-        <button class="menu-toggle-btn" id="menuCollapseBtn" aria-label="Toggle menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <div id="menuItems" class="menu-items">
-            <a href="week1.html">Week 1</a>
-            <a href="week2.html">Week 2</a>
-            <a href="week3.html">Week 3</a>
-            <a href="week4.html">Week 4</a>
-            <a href="week5.html" class="active">Week 5</a>
-            <a href="week6.html">Week 6</a>
-            <a href="week7.html">Week 7</a>
-            <a href="week8.html">Week 8</a>
-            <a href="week9.html">Week 9</a>
-            <a href="week10.html">Week 10</a>
+    <div class="site-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <a href="index.html" class="logo-wrapper">PT</a>
+                <span class="logo-text">Jorn Mertens</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#weeks" class="nav-link">Weeks</a>
+                <a href="index.html#about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Week 5: HTML & CSS Customization</h1>
+            <p>Learning web development fundamentals through practice</p>
+        </div>
+
+        <!-- Content Section -->
+        <div class="section">
+            <div class="modal-list" style="position: relative;">
+                <div class="click-to-top modal-wrapper" style="position: static; width: 100%; margin-bottom: 0;">
+                    <div class="modal-header">
+                        <div class="button-circles-wrap">
+                            <div class="button-circle"></div>
+                            <div class="button-circle"></div>
+                            <div class="button-circle"></div>
+                        </div>
+                        <div class="flex-center">
+                            <div>Week 5</div>
+                            <div>-notes.md</div>
+                        </div>
+                    </div>
+                    <img src="images/week5.png" alt="Week 5" class="modal-thumbnail" style="height: 300px; width: 100%; object-fit: cover; display: block; border-radius: 4px;">
+                    <div class="modal-body">
+                        <h3>Week 5: HTML & CSS Customization</h3>
+                        <p>In week 5 hebben we gewerkt met HTML en CSS door een bestaande website te downloaden en zelf aan te passen. Ik heb geëxperimenteerd met het veranderen van de achtergrondkleur en het lettertype, waarbij ik een nieuw font uit Google Fonts heb geïmplementeerd in de CSS. Zo heb ik verschillende opties uitgeprobeerd totdat ik een lettertype vond dat goed bij de stijl van de site paste. Tijdens deze week kregen we ook extra uitleg over HTML en CSS, waardoor ik beter begreep hoe alles werkt.</p>
+                        <p><strong>Key Activities:</strong></p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li style="margin-bottom: 0.5rem;">HTML and CSS fundamentals</li>
+                            <li style="margin-bottom: 0.5rem;">Website customization and styling</li>
+                            <li style="margin-bottom: 0.5rem;">Google Fonts integration</li>
+                            <li style="margin-bottom: 0.5rem;">Color and typography experimentation</li>
+                        </ul>
+                        <div class="row-space-between">
+                            <a href="week4.html" class="button">← Previous</a>
+                            <a href="week6.html" class="button">Next Week →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <div class="footer">
+                <div>©2025 Jorn Mertens. All rights reserved. | Week 5 - Prototyping Tools</div>
+                <a href="https://github.com/JornMertens/projectdocs" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+
+        <!-- Image Lightbox Modal -->
+        <div class="modal-lightbox" id="imageLightbox">
+            <div class="modal-lightbox-content">
+                <div class="modal-close" onclick="closeLightbox()">×</div>
+                <img id="lightboxImage" src="" alt="Week image">
+            </div>
         </div>
     </div>
 
-    <div class="divider"></div>
-    <div class="container">
-        <h2>Week 5</h2>
-        <p>In week 5 hebben we gewerkt met HTML en CSS door een bestaande website te downloaden en zelf aan te passen. Ik heb geëxperimenteerd met het veranderen van de achtergrondkleur en het lettertype, waarbij ik een nieuw font uit Google Fonts heb geïmplementeerd in de CSS. Zo heb ik verschillende opties uitgeprobeerd totdat ik een lettertype vond dat goed bij de stijl van de site paste. Tijdens deze week kregen we ook extra uitleg over HTML en CSS, waardoor ik beter begreep hoe alles werkt.</p>
-    </div>
-
-    <!-- Main Content -->
     <script>
-        // Mouse tracking gradient effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            
-            // Subtle shift in lightness based on mouse position
-            const lightness1 = Math.round(15 + (x - 50) / 10);
-            const lightness2 = Math.round(20 + (y - 50) / 10);
-            const lightness3 = Math.round(15 + (x - 50) / 10);
-            
-            document.body.style.background = `linear-gradient(${135 + (x - 50) / 5}deg, 
-                rgb(${lightness1}, ${lightness1}, ${lightness1}) 0%, 
-                rgb(${lightness2 + 10}, ${lightness2 + 10}, ${lightness2 + 10}) 50%, 
-                rgb(${lightness3}, ${lightness3}, ${lightness3}) 100%)`;
-            document.body.style.backgroundAttachment = 'fixed';
+        const modalThumbnail = document.querySelector('.modal-thumbnail');
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+
+        modalThumbnail.addEventListener('click', () => {
+            lightboxImage.src = modalThumbnail.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
 
-        // Menu collapse functionality
-        const menuCollapseBtn = document.getElementById('menuCollapseBtn');
-        const menuItems = document.getElementById('menuItems');
-
-        if (menuCollapseBtn) {
-            menuCollapseBtn.addEventListener('click', function() {
-                menuItems.classList.toggle('collapsed');
-                menuCollapseBtn.classList.toggle('active');
-            });
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
-        // Week content toggle functionality
-        function toggleWeek(header) {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector('.week-toggle-icon');
-            content.classList.toggle('collapsed');
-            icon.classList.toggle('collapsed');
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Load saved preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            html.classList.add('dark-mode');
+            themeToggle.classList.add('dark');
+            themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
         }
 
-        // Set active menu item on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.menu-items a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.toggle('dark-mode');
+            themeToggle.classList.toggle('dark');
+            
+            if (isDark) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.querySelector('.theme-toggle-inner').textContent = '🌙';
+            }
         });
     </script>
-
-    <footer>
-        <p>&copy; 2025 Jorn Mertens. All rights reserved.</p>
-    </footer>
 </body>
 </html>

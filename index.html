@@ -4,106 +4,751 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prototyping Tools - 10 Weeks</title>
+    <title>Prototyping Tools</title>
+    <link rel="stylesheet" href="assets/exact-mac-template.css">
     <link rel="stylesheet" href="assets/tailwind.css">
-    <link rel="stylesheet" href="assets/styles.css">
-    <link rel="stylesheet" href="assets/flexboxes.css">
-    <link rel="stylesheet" href="assets/typography.css">
-    <link rel="stylesheet" href="assets/weeks.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f0f4f8;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-tertiary: #666666;
+            --border-light: rgba(0, 0, 0, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --card-border: rgba(255, 255, 255, 0.4);
+            --card-border-hover: rgba(255, 255, 255, 0.6);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        html.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #0f1419;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #999999;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --card-border-hover: rgba(255, 255, 255, 0.3);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes cardClick {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+        }
+
+        .carousel-item.clicked {
+            animation: cardClick 0.5s ease-in forwards;
+        }
+
+        .carousel-container {
+            width: 100%;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(147, 112, 219, 0.02) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .site-container {
+            animation: pageIn 0.6s ease-out;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0 40px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            padding-bottom: 10px;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carousel-track::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .carousel-track::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+
+        .carousel-item {
+            flex: 0 0 240px;
+            height: 360px;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .carousel-item:nth-child(1) { animation-delay: 0s; }
+        .carousel-item:nth-child(2) { animation-delay: 0.2s; }
+        .carousel-item:nth-child(3) { animation-delay: 0.4s; }
+        .carousel-item:nth-child(4) { animation-delay: 0.6s; }
+        .carousel-item:nth-child(5) { animation-delay: 0.8s; }
+        .carousel-item:nth-child(6) { animation-delay: 1s; }
+        .carousel-item:nth-child(7) { animation-delay: 1.2s; }
+        .carousel-item:nth-child(8) { animation-delay: 1.4s; }
+        .carousel-item:nth-child(9) { animation-delay: 1.6s; }
+        .carousel-item:nth-child(10) { animation-delay: 1.8s; }
+        .carousel-item:nth-child(11) { animation-delay: 0s; }
+        .carousel-item:nth-child(12) { animation-delay: 0.2s; }
+        .carousel-item:nth-child(13) { animation-delay: 0.4s; }
+        .carousel-item:nth-child(14) { animation-delay: 0.6s; }
+        .carousel-item:nth-child(15) { animation-delay: 0.8s; }
+        .carousel-item:nth-child(16) { animation-delay: 1s; }
+        .carousel-item:nth-child(17) { animation-delay: 1.2s; }
+        .carousel-item:nth-child(18) { animation-delay: 1.4s; }
+        .carousel-item:nth-child(19) { animation-delay: 1.6s; }
+        .carousel-item:nth-child(20) { animation-delay: 1.8s; }
+
+        .carousel-controls {
+            display: none;
+        }
+
+        .carousel-control-btn {
+            display: none;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2), transparent);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            background: var(--card-bg);
+            border-color: var(--card-border-hover);
+            box-shadow: var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.6);
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 12px;
+        }
+
+        .button-circles {
+            display: flex;
+            gap: 8px;
+        }
+
+        .button-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .button-circle:nth-child(1) {
+            background-color: #ff5f56;
+        }
+
+        .button-circle:nth-child(2) {
+            background-color: #ffbd2e;
+        }
+
+        .button-circle:nth-child(3) {
+            background-color: #27c93f;
+        }
+
+        .card-thumbnail {
+            width: 100%;
+            height: 80px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            flex-grow: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            margin-bottom: 12px;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .card-button {
+            flex: 1;
+            padding: 6px 12px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .card-button:hover {
+            background: var(--text-secondary);
+        }
+
+        .card-tag {
+            padding: 4px 10px;
+            background: var(--border-light);
+            border-radius: 12px;
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--card-border-hover);
+            box-shadow: var(--shadow-hover);
+            transform: scale(1.1);
+        }
+
+        .theme-toggle-inner {
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle.dark .theme-toggle-inner {
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
 <body>
-    <div class="author-name">Jorn Mertens</div>
-    
-    <!-- Hero Banner -->
-    <div class="hero-banner">
-        <h1>Prototyping Tools</h1>
-    </div>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-inner">🌙</span>
+    </button>
 
-    <!-- Centered Home button above carousel -->
-    <div style="display:flex; justify-content:center;">
-        <a href="index.html" class="home-btn-pill">Home</a>
-    </div>
+    <div class="site-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <a href="index.html" class="logo-wrapper">PT</a>
+                <span class="logo-text">Jorn Mertens</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#weeks" class="nav-link">Weeks</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+        </header>
 
-    <!-- Weeks Carousel -->
-    <div class="weeks-carousel">
-        <button class="carousel-btn" id="weeksPrev" aria-label="Previous">‹</button>
-        <div class="carousel-track" id="weeksTrack">
-            <div class="carousel-item"><a href="week1.html">Week 1</a></div>
-            <div class="carousel-item"><a href="week2.html">Week 2</a></div>
-            <div class="carousel-item"><a href="week3.html">Week 3</a></div>
-            <div class="carousel-item"><a href="week4.html">Week 4</a></div>
-            <div class="carousel-item"><a href="week5.html">Week 5</a></div>
-            <div class="carousel-item"><a href="week6.html">Week 6</a></div>
-            <div class="carousel-item"><a href="week7.html">Week 7</a></div>
-            <div class="carousel-item"><a href="week8.html">Week 8</a></div>
-            <div class="carousel-item"><a href="week9.html">Week 9</a></div>
-            <div class="carousel-item"><a href="week10.html">Week 10</a></div>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Prototyping Tools</h1>
+            <p>A 10-week journey exploring design, ideation, and digital prototyping</p>
         </div>
-        <button class="carousel-btn" id="weeksNext" aria-label="Next">›</button>
-    </div>
 
-    <div class="divider"></div>
+        <!-- Weeks Carousel Section -->
+        <div class="section" id="weeks">
+            <h2>10 Weeks</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                    <!-- Week 1 -->
+                    <div class="carousel-item center" data-week="1">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #e8f4f8;"></div>
+                            <div class="card-title">Week 1: Brainstorming</div>
+                            <div class="card-description">De eerste week heb ik nagedacht over hoe ik mijn informatie het best kon overbrengen op mijn borden.</div>
+                            <div class="card-footer">
+                                <a href="week1.html" class="card-button">View</a>
+                                <span class="card-tag">Design</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="container">
-        <h2 style="text-align: center; font-size: 1.8em; margin: 1.5em 0 0.5em 0;">10 Week Journey</h2>
-        <p>Welkom, ik ben Jorn Mertens, een enthousiaste student die zich verdiept in prototyping tools. Dit project documenteert mijn reis door 10 weken van leren, experimenteren en groeien in deze fascinerende discipline. </p>
+                    <!-- Week 2 -->
+                    <div class="carousel-item" data-week="2">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #f0e8f4;"></div>
+                            <div class="card-title">Week 2: Digital Design</div>
+                            <div class="card-description">In Figma heb ik mijn eerste ideeën verder uitgewerkt en verschillende opties getest.</div>
+                            <div class="card-footer">
+                                <a href="week2.html" class="card-button">View</a>
+                                <span class="card-tag">Figma</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 3 -->
+                    <div class="carousel-item" data-week="3">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #f4e8e8;"></div>
+                            <div class="card-title">Week 3: Refinement</div>
+                            <div class="card-description">Onze borden omzetten naar PDF-bestanden en finetuning van details.</div>
+                            <div class="card-footer">
+                                <a href="week3.html" class="card-button">View</a>
+                                <span class="card-tag">PDF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 4 -->
+                    <div class="carousel-item" data-week="4">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #e8f0f4;"></div>
+                            <div class="card-title">Week 4: Code Impl.</div>
+                            <div class="card-description">Screenshot to code conversion using AI and manual refinement.</div>
+                            <div class="card-footer">
+                                <a href="week4.html" class="card-button">View</a>
+                                <span class="card-tag">Code</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 5 -->
+                    <div class="carousel-item" data-week="5">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #f4f0e8;"></div>
+                            <div class="card-title">Week 5: HTML & CSS</div>
+                            <div class="card-description">HTML and CSS fundamentals with Google Fonts integration.</div>
+                            <div class="card-footer">
+                                <a href="week5.html" class="card-button">View</a>
+                                <span class="card-tag">Frontend</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 6 -->
+                    <div class="carousel-item" data-week="6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #e8f4f0;"></div>
+                            <div class="card-title">Week 6: Content</div>
+                            <div class="card-description">Adding documentation and completing the website during holiday.</div>
+                            <div class="card-footer">
+                                <a href="week6.html" class="card-button">View</a>
+                                <span class="card-tag">Docs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 7 -->
+                    <div class="carousel-item" data-week="7">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #f0e8f4;"></div>
+                            <div class="card-title">Week 7: Exam</div>
+                            <div class="card-description">Assessment and evaluation of all learnings and projects.</div>
+                            <div class="card-footer">
+                                <a href="week7.html" class="card-button">View</a>
+                                <span class="card-tag">Assess</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 8 -->
+                    <div class="carousel-item" data-week="8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #f4e8e8;"></div>
+                            <div class="card-title">Week 8: Mobile</div>
+                            <div class="card-description">Interactive mobile versions for train screens in Figma.</div>
+                            <div class="card-footer">
+                                <a href="week8.html" class="card-button">View</a>
+                                <span class="card-tag">Mobile</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 9 -->
+                    <div class="carousel-item" data-week="9">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #e8f0f4;"></div>
+                            <div class="card-title">Week 9: Tailwind</div>
+                            <div class="card-description">Node.js and Tailwind CSS framework implementation.</div>
+                            <div class="card-footer">
+                                <a href="week9.html" class="card-button">View</a>
+                                <span class="card-tag">Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 10 -->
+                    <div class="carousel-item" data-week="10">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="button-circles">
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                    <div class="button-circle"></div>
+                                </div>
+                            </div>
+                            <div class="card-thumbnail" style="background-color: #f4f0e8;"></div>
+                            <div class="card-title">Week 10: Final</div>
+                            <div class="card-description">Project finalization and reflection on the entire journey.</div>
+                            <div class="card-footer">
+                                <a href="week10.html" class="card-button">View</a>
+                                <span class="card-tag">Final</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section" id="about">
+            <h2>About</h2>
+            <p style="font-size: 1.6rem; max-width: 800px; line-height: 1.8; color: #555;">
+                Welcome! I'm Jorn Mertens, an enthusiastic student diving deep into prototyping tools. This project documents my 10-week journey of learning, experimenting, and growing in this fascinating discipline. Each week represents a milestone in understanding design thinking, user-centered design, and practical prototyping techniques.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <div class="footer">
+                <div>©2025 Jorn Mertens. All rights reserved. | Prototyping Tools Portfolio</div>
+                <a href="https://github.com/JornMertens/projectdocs" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Mouse tracking gradient effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            
-            // Subtle shift in lightness based on mouse position
-            const lightness1 = Math.round(15 + (x - 50) / 10);
-            const lightness2 = Math.round(20 + (y - 50) / 10);
-            const lightness3 = Math.round(15 + (x - 50) / 10);
-            
-            document.body.style.background = `linear-gradient(${135 + (x - 50) / 5}deg, 
-                rgb(${lightness1}, ${lightness1}, ${lightness1}) 0%, 
-                rgb(${lightness2 + 10}, ${lightness2 + 10}, ${lightness2 + 10}) 50%, 
-                rgb(${lightness3}, ${lightness3}, ${lightness3}) 100%)`;
-            document.body.style.backgroundAttachment = 'fixed';
+        const track = document.getElementById('carouselTrack');
+        
+        // Week data
+        const weeks = [
+            {
+                num: 1,
+                title: 'Week 1: Brainstorming',
+                desc: 'De eerste week heb ik nagedacht over hoe ik mijn informatie het best kon overbrengen op mijn borden.',
+                image: 'images/week1.png',
+                tag: 'Design',
+                link: 'week1.html'
+            },
+            {
+                num: 2,
+                title: 'Week 2: Digital Design',
+                desc: 'In Figma heb ik mijn eerste ideeën verder uitgewerkt en verschillende opties getest.',
+                image: 'images/week2.png',
+                tag: 'Figma',
+                link: 'week2.html'
+            },
+            {
+                num: 3,
+                title: 'Week 3: Refinement',
+                desc: 'Onze borden omzetten naar PDF-bestanden en finetuning van details.',
+                image: 'images/week3.png',
+                tag: 'PDF',
+                link: 'week3.html'
+            },
+            {
+                num: 4,
+                title: 'Week 4: Code Impl.',
+                desc: 'Screenshot to code conversion using AI and manual refinement.',
+                image: 'images/week4.png',
+                tag: 'Code',
+                link: 'week4.html'
+            },
+            {
+                num: 5,
+                title: 'Week 5: HTML & CSS',
+                desc: 'HTML and CSS fundamentals with Google Fonts integration.',
+                image: 'images/week5.png',
+                tag: 'Frontend',
+                link: 'week5.html'
+            },
+            {
+                num: 6,
+                title: 'Week 6: Content',
+                desc: 'Adding documentation and completing the website during holiday.',
+                image: 'images/week6.png',
+                tag: 'Docs',
+                link: 'week6.html'
+            },
+            {
+                num: 7,
+                title: 'Week 7: Exam',
+                desc: 'Assessment and evaluation of all learnings and projects.',
+                image: 'images/week7.png',
+                tag: 'Assess',
+                link: 'week7.html'
+            },
+            {
+                num: 8,
+                title: 'Week 8: Mobile',
+                desc: 'Interactive mobile versions for train screens in Figma.',
+                image: 'images/week8.png',
+                tag: 'Mobile',
+                link: 'week8.html'
+            },
+            {
+                num: 9,
+                title: 'Week 9: Tailwind',
+                desc: 'Node.js and Tailwind CSS framework implementation.',
+                image: 'images/week9.png',
+                tag: 'Tailwind',
+                link: 'week9.html'
+            },
+            {
+                num: 10,
+                title: 'Week 10: Final',
+                desc: 'Project finalization and reflection on the entire journey.',
+                image: 'images/week10.png',
+                tag: 'Final',
+                link: 'week10.html'
+            }
+        ];
+
+        function createCard(weekData) {
+            return `
+                <div class="carousel-item" data-week="${weekData.num}">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="button-circles">
+                                <div class="button-circle"></div>
+                                <div class="button-circle"></div>
+                                <div class="button-circle"></div>
+                            </div>
+                        </div>
+                        <img src="${weekData.image}" alt="Week ${weekData.num}" class="card-thumbnail">
+                        <div class="card-title">${weekData.title}</div>
+                        <div class="card-description">${weekData.desc}</div>
+                        <div class="card-footer">
+                            <a href="${weekData.link}" class="card-button">View</a>
+                            <span class="card-tag">${weekData.tag}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create the carousel with all weeks once
+        let htmlContent = '';
+        weeks.forEach(week => {
+            htmlContent += createCard(week);
         });
 
-        // Carousel controls
-        const weeksTrack = document.getElementById('weeksTrack');
-        const weeksPrev = document.getElementById('weeksPrev');
-        const weeksNext = document.getElementById('weeksNext');
-        if (weeksTrack && weeksPrev && weeksNext) {
-            weeksTrack.style.scrollBehavior = 'smooth';
-            weeksPrev.addEventListener('click', () => {
-                weeksTrack.scrollBy({ left: -300, behavior: 'smooth' });
-            });
-            weeksNext.addEventListener('click', () => {
-                weeksTrack.scrollBy({ left: 300, behavior: 'smooth' });
-            });
-        }
+        track.innerHTML = htmlContent;
 
-        // Week content toggle functionality (safe no-op if not present)
-        function toggleWeek(header) {
-            const content = header && header.nextElementSibling;
-            const icon = header && header.querySelector && header.querySelector('.week-toggle-icon');
-            if (content) content.classList.toggle('collapsed');
-            if (icon) icon.classList.toggle('collapsed');
-        }
-
-        // Set active menu item on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.menu-items a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
+        // Add click handlers to all cards
+        document.querySelectorAll('.carousel-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (!e.target.closest('.card-button')) {
+                    const weekNum = item.getAttribute('data-week');
+                    // Add animation class
+                    item.classList.add('clicked');
+                    // Navigate after animation completes
+                    setTimeout(() => {
+                        window.location.href = `week${weekNum}.html`;
+                    }, 500);
                 }
             });
         });
-    </script>
 
-    <footer>
-        <p>&copy; 2025 Jorn Mertens. All rights reserved.</p>
-    </footer>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Ensure button exists
+        if (!themeToggle) {
+            console.error('Theme toggle button not found');
+        } else {
+            // Load saved preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                htmlElement.classList.add('dark-mode');
+                themeToggle.classList.add('dark');
+                themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = htmlElement.classList.toggle('dark-mode');
+                themeToggle.classList.toggle('dark');
+                
+                if (isDark) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.querySelector('.theme-toggle-inner').textContent = '🌙';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
 

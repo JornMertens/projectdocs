@@ -4,154 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 1 - Prototyping Tools</title>
+    <link rel="stylesheet" href="assets/exact-mac-template.css">
     <link rel="stylesheet" href="assets/tailwind.css">
-    <link rel="stylesheet" href="assets/styles.css">
-    <link rel="stylesheet" href="assets/flexboxes.css">
-    <link rel="stylesheet" href="assets/typography.css">
-    <link rel="stylesheet" href="assets/weeks.css">
     <style>
-        /* Afbeelding container styling toegevoegd */
-        .image-container {
-            display: inline-block;
-            padding: 5px;
-            border: 1px solid #444;       /* donkere rand */
-            border-radius: 12px;          /* afgeronde hoeken */
-            overflow: hidden;             /* afbeelding blijft binnen container */
-            background-color: #2a3360;    /* donkerblauwe achtergrond */
-            margin: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .modal-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-out;
         }
 
-        .image-container img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 8px;           /* lichte afronding van afbeelding */
+        .modal-lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .image-container:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        .modal-lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        .modal-lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-thumbnail {
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .modal-thumbnail:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="author-name">Jorn Mertens</div>
-    
-    <!-- Hero Banner -->
-    <div class="hero-banner">
-        <h1>Prototyping Tools</h1>
-    </div>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-inner">🌙</span>
+    </button>
 
-    <!-- Menu Container -->
-    <div class="menu-container">
-        <a href="index.html" class="home-btn-pill">Home</a>
-        <button class="menu-toggle-btn" id="menuCollapseBtn" aria-label="Toggle menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <div id="menuItems" class="menu-items">
-            <a href="week1.html" class="active">Week 1</a>
-            <a href="week2.html">Week 2</a>
-            <a href="week3.html">Week 3</a>
-            <a href="week4.html">Week 4</a>
-            <a href="week5.html">Week 5</a>
-            <a href="week6.html">Week 6</a>
-            <a href="week7.html">Week 7</a>
-            <a href="week8.html">Week 8</a>
-            <a href="week9.html">Week 9</a>
-            <a href="week10.html">Week 10</a>
+    <div class="site-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <a href="index.html" class="logo-wrapper">PT</a>
+                <span class="logo-text">Jorn Mertens</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#weeks" class="nav-link">Weeks</a>
+                <a href="index.html#about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Week 1: Brainstorming & Ideation</h1>
+            <p>Exploring initial concepts and design directions</p>
         </div>
-    </div>
 
-    <div class="divider"></div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <h2>Week 1</h2>
-        <p>De eerste week heb ik nagedacht over hoe ik mijn informatie het best kon overbrengen op mijn borden. Ik begon met schetsen en het uitwerken van verschillende ideeën. Ook heb ik ter inspiratie meerdere borden opgezocht, zodat ik een duidelijk beeld had van de richting die ik uit wilde.</p>
-        <p>Klik om het groter te maken.</p>
-
-        <!-- Week Item - Image met CSS styling -->
-        <div class="flex justify-center">
-            <img id="expandImage" src="images/Lo-fi Brainstorm.png" alt="Lo-fi Brainstorm" class="w-80 cursor-pointer hover:opacity-80 transition-opacity rounded-lg" onclick="openModal()">
+        <!-- Content Section -->
+        <div class="section">
+            <div class="modal-list" style="position: relative;">
+                <div class="click-to-top modal-wrapper" style="position: static; width: 100%; margin-bottom: 0;">
+                    <div class="modal-header">
+                        <div class="button-circles-wrap">
+                            <div class="button-circle"></div>
+                            <div class="button-circle"></div>
+                            <div class="button-circle"></div>
+                        </div>
+                        <div class="flex-center">
+                            <div>Week 1</div>
+                            <div>-notes.md</div>
+                        </div>
+                    </div>
+                    <img src="images/week1.png" alt="Week 1" class="modal-thumbnail" style="height: 300px; width: 100%; object-fit: cover; display: block; border-radius: 4px;">
+                    <div class="modal-body">
+                        <h3>Week 1: Brainstorming & Ideation</h3>
+                        <p>De eerste week heb ik nagedacht over hoe ik mijn informatie het best kon overbrengen op mijn borden. Ik begon met schetsen en het uitwerken van verschillende ideeën. Ook heb ik ter inspiratie meerdere borden opgezocht, zodat ik een duidelijk beeld had van de richting die ik uit wilde.</p>
+                        <p><strong>Key Activities:</strong></p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                            <li style="margin-bottom: 0.5rem;">Research and inspiration gathering</li>
+                            <li style="margin-bottom: 0.5rem;">Initial sketching and ideation</li>
+                            <li style="margin-bottom: 0.5rem;">Exploring different design directions</li>
+                            <li style="margin-bottom: 0.5rem;">Defining project scope and goals</li>
+                        </ul>
+                        <div class="row-space-between">
+                            <a href="index.html" class="button">Back to Home</a>
+                            <a href="week2.html" class="button">Next Week →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- Modal -->
-        <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" onclick="closeModal(event)">
-            <div class="relative max-w-4xl max-h-screen">
-                <img src="images/Lo-fi Brainstorm.png" alt="Lo-fi Brainstorm" class="max-w-full max-h-screen object-contain rounded-lg">
-                <button onclick="closeModal()" class="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition">✕</button>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <div class="footer">
+                <div>©2025 Jorn Mertens. All rights reserved. | Week 1 - Prototyping Tools</div>
+                <a href="https://github.com/JornMertens/projectdocs" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+
+        <!-- Image Lightbox Modal -->
+        <div class="modal-lightbox" id="imageLightbox">
+            <div class="modal-lightbox-content">
+                <div class="modal-close" onclick="closeLightbox()">×</div>
+                <img id="lightboxImage" src="" alt="Week image">
             </div>
         </div>
     </div>
 
     <script>
-        function openModal() {
-            document.getElementById('imageModal').classList.remove('hidden');
+        const modalThumbnail = document.querySelector('.modal-thumbnail');
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+
+        modalThumbnail.addEventListener('click', () => {
+            lightboxImage.src = modalThumbnail.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
-        
-        function closeModal(event) {
-            if (event && event.target.id !== 'imageModal') return;
-            document.getElementById('imageModal').classList.add('hidden');
-        }
-        
-        // Close modal on Escape key
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
         });
 
-        // Mouse tracking gradient effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            
-            // Subtle shift in lightness based on mouse position
-            const lightness1 = Math.round(15 + (x - 50) / 10);
-            const lightness2 = Math.round(20 + (y - 50) / 10);
-            const lightness3 = Math.round(15 + (x - 50) / 10);
-            
-            document.body.style.background = `linear-gradient(${135 + (x - 50) / 5}deg, 
-                rgb(${lightness1}, ${lightness1}, ${lightness1}) 0%, 
-                rgb(${lightness2 + 10}, ${lightness2 + 10}, ${lightness2 + 10}) 50%, 
-                rgb(${lightness3}, ${lightness3}, ${lightness3}) 100%)`;
-            document.body.style.backgroundAttachment = 'fixed';
-        });
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
 
-        // Menu collapse functionality
-        const menuCollapseBtn = document.getElementById('menuCollapseBtn');
-        const menuItems = document.getElementById('menuItems');
+        // Ensure button exists
+        if (!themeToggle) {
+            console.error('Theme toggle button not found');
+        } else {
+            // Load saved preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                htmlElement.classList.add('dark-mode');
+                themeToggle.classList.add('dark');
+                themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
+            }
 
-        if (menuCollapseBtn) {
-            menuCollapseBtn.addEventListener('click', function() {
-                menuItems.classList.toggle('collapsed');
-                menuCollapseBtn.classList.toggle('active');
-            });
-        }
-
-        // Week content toggle functionality
-        function toggleWeek(header) {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector('.week-toggle-icon');
-            content.classList.toggle('collapsed');
-            icon.classList.toggle('collapsed');
-        }
-
-        // Set active menu item on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.menu-items a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
+            themeToggle.addEventListener('click', () => {
+                const isDark = htmlElement.classList.toggle('dark-mode');
+                themeToggle.classList.toggle('dark');
+                
+                if (isDark) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.querySelector('.theme-toggle-inner').textContent = '🌙';
                 }
             });
-        });
+        }
     </script>
-
-    <footer>
-        <p>&copy; 2025 Jorn Mertens. All rights reserved.</p>
-    </footer>
 </body>
 </html>
