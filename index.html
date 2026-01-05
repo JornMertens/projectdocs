@@ -8,37 +8,9 @@
     <link rel="stylesheet" href="assets/exact-mac-template.css">
     <link rel="stylesheet" href="assets/tailwind.css">
     <style>
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f0f4f8;
-            --text-primary: #1a1a1a;
-            --text-secondary: #4a4a4a;
-            --text-tertiary: #666666;
-            --border-light: rgba(0, 0, 0, 0.1);
-            --card-bg: rgba(255, 255, 255, 0.15);
-            --card-border: rgba(255, 255, 255, 0.4);
-            --card-border-hover: rgba(255, 255, 255, 0.6);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.15);
-        }
-
-        html.dark-mode {
-            --bg-primary: #1a1a1a;
-            --bg-secondary: #0f1419;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-tertiary: #999999;
-            --border-light: rgba(255, 255, 255, 0.1);
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --card-border: rgba(255, 255, 255, 0.15);
-            --card-border-hover: rgba(255, 255, 255, 0.3);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.4);
-        }
-
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            background-color: #ffffff;
+            color: #1a1a1a;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -298,58 +270,24 @@
             color: var(--text-tertiary);
         }
 
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10000;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--card-border-hover);
-            box-shadow: var(--shadow-hover);
-            transform: scale(1.1);
-        }
-
-        .theme-toggle-inner {
-            transition: transform 0.3s ease;
-        }
-
         .theme-toggle.dark .theme-toggle-inner {
             transform: rotate(180deg);
         }
     </style>
 </head>
 <body>
-    <!-- Dark Mode Toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle-inner">🌙</span>
-    </button>
 
     <div class="site-container">
         <!-- Header -->
         <header class="header">
             <div class="logo-container">
                 <a href="index.html" class="logo-wrapper">PT</a>
-                <span class="logo-text">Jorn Mertens</span>
+                <span class="logo-text">Jorn Mertens - 1GDM1</span>
             </div>
             <nav class="nav-menu">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="#weeks" class="nav-link">Weeks</a>
-                <a href="#about" class="nav-link">About</a>
+                <a href="https://www.figma.com/design/5602vRF4klvSwAFgJnkHrR/Untitled?node-id=0-1&t=brtEZff9mcF8kc1O-1" class="nav-link" target="_blank" rel="noopener noreferrer">Figma</a>
             </nav>
         </header>
 
@@ -581,7 +519,10 @@
         <div class="footer-section">
             <div class="footer">
                 <div>©2025 Jorn Mertens. All rights reserved. | Prototyping Tools Portfolio</div>
-                <a href="https://github.com/JornMertens/projectdocs" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <div style="display: flex; gap: 20px;">
+                    <a href="./assets/portfolio.pdf" class="footer-link" download>Download PDF</a>
+                    <a href="https://github.com/JornMertens/projectdocs" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
             </div>
         </div>
     </div>
@@ -719,35 +660,7 @@
             });
         });
 
-        // Dark mode toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
-
-        // Ensure button exists
-        if (!themeToggle) {
-            console.error('Theme toggle button not found');
-        } else {
-            // Load saved preference
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            if (savedTheme === 'dark') {
-                htmlElement.classList.add('dark-mode');
-                themeToggle.classList.add('dark');
-                themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = htmlElement.classList.toggle('dark-mode');
-                themeToggle.classList.toggle('dark');
-                
-                if (isDark) {
-                    localStorage.setItem('theme', 'dark');
-                    themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    themeToggle.querySelector('.theme-toggle-inner').textContent = '🌙';
-                }
-            });
-        }
+        // Dark mode toggle removed
     </script>
 </body>
 </html>

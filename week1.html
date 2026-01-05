@@ -86,22 +86,18 @@
     </style>
 </head>
 <body>
-    <!-- Dark Mode Toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle-inner">🌙</span>
-    </button>
 
     <div class="site-container">
         <!-- Header -->
         <header class="header">
             <div class="logo-container">
                 <a href="index.html" class="logo-wrapper">PT</a>
-                <span class="logo-text">Jorn Mertens</span>
+                <span class="logo-text">Jorn Mertens - 1GDM1</span>
             </div>
             <nav class="nav-menu">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="index.html#weeks" class="nav-link">Weeks</a>
-                <a href="index.html#about" class="nav-link">About</a>
+                <a href="https://www.figma.com/design/5602vRF4klvSwAFgJnkHrR/Untitled?node-id=0-1&t=brtEZff9mcF8kc1O-1" class="nav-link" target="_blank" rel="noopener noreferrer">Figma</a>
             </nav>
         </header>
 
@@ -191,35 +187,7 @@
             }
         });
 
-        // Dark mode toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
-
-        // Ensure button exists
-        if (!themeToggle) {
-            console.error('Theme toggle button not found');
-        } else {
-            // Load saved preference
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            if (savedTheme === 'dark') {
-                htmlElement.classList.add('dark-mode');
-                themeToggle.classList.add('dark');
-                themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = htmlElement.classList.toggle('dark-mode');
-                themeToggle.classList.toggle('dark');
-                
-                if (isDark) {
-                    localStorage.setItem('theme', 'dark');
-                    themeToggle.querySelector('.theme-toggle-inner').textContent = '☀️';
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    themeToggle.querySelector('.theme-toggle-inner').textContent = '🌙';
-                }
-            });
-        }
+        // Dark mode toggle removed
     </script>
 </body>
 </html>
